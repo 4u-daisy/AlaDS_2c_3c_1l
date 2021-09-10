@@ -2,46 +2,54 @@
 #include "matrix.h"
 
 
-/*
-a - N = 2, M = 3
-b - N = 3, M = 3
-*/
+
 
 int main() {
 
-	double* a_data;
-	double* b_data;
+	const int N = 2, M = 2;
+	const int NB = 2, MB = 2;
+	double** arr_one = new double* [N];
+	double** arr_two = new double* [NB];
 
 
-	a_data = new double[4];
-	b_data = new double[4];
-
-	for (int i = 0; i < 4; i++) {
-		a_data[i] = i;
+	for (int i = 0; i < N; i++) {
+		arr_one[i] = new double[M];
+		for (int j = 0; j < M; j++) {
+			arr_one[i][j] = rand() % 20;
+		}
 	}
-	for (int i = 0; i < 4; i++) {
-		b_data[i] = i;
+	for (int i = 0; i < NB; i++) {
+		arr_two[i] = new double[MB];
+
+		for (int j = 0; j < MB; j++) {
+			arr_two[i][j] = rand() % 20;
+		}
 	}
 
-	matrix a(2, 2, a_data);
-	matrix b(2, 2, b_data);
-
-
-	a(0, 1) = -9;
+	matrix a(N, M, arr_one);
+	matrix b(NB, MB, arr_two);
 
 	try {
 
 		std::cout << a << '\n';
 		std::cout << b << '\n';
 
-
-		matrix c = a * b;
+		/*matrix c = a * b;
 
 		std::cout << c << '\n';
 
-		/*std::cout << a.matrix_trace() << '\n';
-		b = (a / 10) * 3;
-		std::cout << b << '\n';*/
+		std::cout << c*a << '\n';
+
+		std::cout << c.matrix_trace() << '\n';
+
+		std::cout << c << '\n';*/
+
+		bool flag = a > b;
+
+		std::cout << flag << '\n';
+
+		a(0, 1) = 155;
+		std::cout << a << '\n';
 
 	}
 	catch (std::exception& e) {
