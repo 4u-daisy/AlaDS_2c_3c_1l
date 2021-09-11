@@ -19,6 +19,12 @@ matrix::matrix(const int N, const int M, double** data) {
 }
 matrix::matrix(const matrix& rhs) : _N(rhs._N), _M(rhs._M), _data(rhs._data) {}
 
+
+double** matrix::get_data()
+{
+	return _data;
+}
+
 double& matrix::operator()(const int N, const int M)
 {
 	if (_N <= N || _M <= M)
@@ -31,12 +37,23 @@ double matrix::operator()(const int N, const int M) const
 		throw std::logic_error("error");
 	return _data[N][M];
 }
+void matrix::operator=(const int i)
+{
+	if (i != NULL) {
+		throw std::logic_error("error");
+	}
+	_data = NULL;
+	_M = 0;
+	_N = 0;
+
+}
 void matrix::operator=(const matrix& rhs) 
 {
 	_N = rhs._N;
 	_M = rhs._M;
 	_data = rhs._data;
 }
+
 
 matrix matrix::operator+(const matrix& rhs)
 {

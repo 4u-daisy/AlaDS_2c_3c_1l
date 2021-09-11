@@ -29,8 +29,12 @@ public:
 	matrix(const int N, const int M, double** data);
 	matrix(const matrix& rhs);
 
+	double** get_data();
+
 	double& operator()(const int N, const int M);
 	double operator()(const int N, const int M) const;
+
+	void operator=(const int i);
 
 	void operator=(const matrix& rhs);
 	matrix operator+(const matrix& rhs);

@@ -1,8 +1,25 @@
 #include <iostream>
 #include "matrix.h"
+#include "collection.h"
+/*
+*Вывод меню
+* функции
+* 
+* 
+* 
+*/
+
+int get_key() {
+	int key = getchar();
+	if ((key == 0) || (key == 224)) key = getchar();
+	return key;
+}
+
+void elit_menu() {
 
 
 
+}
 
 int main() {
 
@@ -29,12 +46,26 @@ int main() {
 	matrix a(N, M, arr_one);
 	matrix b(NB, MB, arr_two);
 
-	try {
+	collection cll;
+	cll.push_back(a);
+	cll.push_back(b);
+	
+	cll.pop_back();
+
+
+	matrix c(NB, MB, arr_two);
+	cll.push_back(c);
+
+	b(0, 0) = -99;
+
+	std::cout << cll << "live matrix :)";
+
+	/*try {
 
 		std::cout << a << '\n';
 		std::cout << b << '\n';
 
-		/*matrix c = a * b;
+		matrix c = a * b;
 
 		std::cout << c << '\n';
 
@@ -42,7 +73,7 @@ int main() {
 
 		std::cout << c.matrix_trace() << '\n';
 
-		std::cout << c << '\n';*/
+		std::cout << c << '\n';
 
 		bool flag = a > b;
 
@@ -56,6 +87,6 @@ int main() {
 		std::cerr << "Caught: " << e.what() << std::endl;
 		std::cerr << "Type: " << typeid(e).name() << std::endl;
 	}
-
+	*/
 	return 0;
 }
