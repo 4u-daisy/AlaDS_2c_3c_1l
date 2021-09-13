@@ -1,64 +1,52 @@
-#include <iostream>
-#include "matrix.h"
-#include "collection.h"
-/*
-*Вывод меню
-* функции
-* 
-* 
-* 
-*/
+//#include <iostream>
+//#include <conio.h>
+//#include "matrix.h"
+//#include "collection.h"
 
-int get_key() {
-	int key = getchar();
-	if ((key == 0) || (key == 224)) key = getchar();
-	return key;
-}
-
-void elit_menu() {
+#include "interface.h"
 
 
-
-}
 
 int main() {
 
-	const int N = 2, M = 2;
-	const int NB = 2, MB = 2;
-	double** arr_one = new double* [N];
-	double** arr_two = new double* [NB];
-
-
-	for (int i = 0; i < N; i++) {
-		arr_one[i] = new double[M];
-		for (int j = 0; j < M; j++) {
-			arr_one[i][j] = rand() % 20;
-		}
-	}
-	for (int i = 0; i < NB; i++) {
-		arr_two[i] = new double[MB];
-
-		for (int j = 0; j < MB; j++) {
-			arr_two[i][j] = rand() % 20;
-		}
-	}
-
-	matrix a(N, M, arr_one);
-	matrix b(NB, MB, arr_two);
+	//const int N = 2, M = 2;
+	//const int NB = 2, MB = 2;
+	//double** arr_one = new double* [N];
+	//double** arr_two = new double* [NB];
+	//for (int i = 0; i < N; i++) {
+	//	arr_one[i] = new double[M];
+	//	for (int j = 0; j < M; j++) {
+	//		arr_one[i][j] = rand() % 20;
+	//	}
+	//}
+	//for (int i = 0; i < NB; i++) {
+	//	arr_two[i] = new double[MB];
+	//	for (int j = 0; j < MB; j++) {
+	//		arr_two[i][j] = rand() % 20;
+	//	}
+	//}
+	//matrix a(N, M, arr_one);
+	//matrix b(NB, MB, arr_two);
+	//std::cout << a + b;
 
 	collection cll;
-	cll.push_back(a);
-	cll.push_back(b);
-	
+	matrix tmp;
+	cll.push_back(tmp);
 	cll.pop_back();
+	//cll.push_back(a);
+	//cll.push_back(b);
+	//matrix c(NB, MB, arr_two);
+	//cll.push_back(c);
+	//b(0, 0) = -99;
+	//std::cout << cll << "live matrix :)";
+	//std::cout << "\n\n\n";
 
+	edit_menu(cll);
 
-	matrix c(NB, MB, arr_two);
-	cll.push_back(c);
-
-	b(0, 0) = -99;
-
-	std::cout << cll << "live matrix :)";
+	for (int i = 0; i < cll._array_mtrx[i].get_M(); i++) {
+		delete[] cll._array_mtrx[i].get_data();
+	}
+	delete[] cll._array_mtrx;
 
 	/*try {
 

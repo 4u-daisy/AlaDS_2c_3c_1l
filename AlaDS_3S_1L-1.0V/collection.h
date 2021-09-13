@@ -8,7 +8,8 @@ public:
 	unsigned int _size;
 
 	collection(): _array_mtrx(NULL), _size(0) {}
-	~collection();
+	collection(collection& copied) : _array_mtrx(copied._array_mtrx), _size(copied._size) {}
+	collection(matrix* array_mtrx, const unsigned int size) : _array_mtrx(array_mtrx), _size(size) {}
 
 	void push_back(matrix& a);
 	void pop_back();

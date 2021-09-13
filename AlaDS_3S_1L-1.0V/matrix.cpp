@@ -20,9 +20,19 @@ matrix::matrix(const int N, const int M, double** data) {
 matrix::matrix(const matrix& rhs) : _N(rhs._N), _M(rhs._M), _data(rhs._data) {}
 
 
-double** matrix::get_data()
+double** matrix::get_data() const
 {
 	return _data;
+}
+
+int matrix::get_N() const
+{
+	return _N;
+}
+
+int matrix::get_M() const
+{
+	return _M;
 }
 
 double& matrix::operator()(const int N, const int M)
@@ -46,6 +56,13 @@ void matrix::operator=(const int i)
 	_M = 0;
 	_N = 0;
 
+}
+bool matrix::operator==(const int i)
+{
+	if (_data == NULL) {
+		return false;
+	}
+	return true;
 }
 void matrix::operator=(const matrix& rhs) 
 {
@@ -215,13 +232,18 @@ double matrix::matrix_trace() const
 
 std::ostream& operator<<(std::ostream& out, const matrix& lhs)
 {
-	for (int i = 0; i < lhs._N; i++) {
-		for (int j = 0; j < lhs._M; j++) {
-			out << lhs._data[i][j] << " ";
+	if (lhs._data != NULL) {
+		for (int i = 0; i < lhs._N; i++) {
+			for (int j = 0; j < lhs._M; j++) {
+				out << lhs._data[i][j] << " ";
+			}
+			out << "\n";
 		}
-		out << "\n";
+		return out;
 	}
-	return out;
+	else {
+		out << "Matrix does not exist";
+	}
 }
 std::istream& operator>>(std::istream& in, matrix& lhs)
 {

@@ -1,10 +1,5 @@
 #include "collection.h"
 
-collection::~collection()
-{
-	delete[] _array_mtrx->get_data();
-}
-
 void collection::push_back(matrix& a)
 {
 	if (_size % 10 == 0 || _size == 0) {
@@ -19,7 +14,8 @@ void collection::push_back(matrix& a)
 
 void collection::pop_back()
 {
-	_size -= 1;
+	if (_size != 0)
+		_size -= 1;
 	_array_mtrx[_size] = NULL;
 }
 
