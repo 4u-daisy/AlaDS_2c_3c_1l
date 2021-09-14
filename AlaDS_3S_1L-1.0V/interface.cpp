@@ -250,7 +250,7 @@ void res_binary_numb_operation(collection& cll, const int choose, const int ind)
 	}
 	int numb = 0;
 	std::cout << "\nOkay, input number: ";
-	std::cin >> numb;
+	input_correctly_number(numb);
 	if (choose == 52) {
 		std::cout << "\n\nRESULT\n\n " << cll._array_mtrx[ind] * numb;
 		push_collection(cll, cll._array_mtrx[ind] * numb);
@@ -357,7 +357,13 @@ void mathematical_operations(collection& cll, unsigned int ind)
 
 void help(collection& cll)
 {
-	std::cout << "help";
+	system("cls");
+	std::cout << "This program performs various actions with matrices.\n";
+	std::cout << "Available actions are addition, subtraction, multiplication ";
+	std::cout << "(matrices and by a number), division (by a number), calculating the trace of a matrix.\n";
+	std::cout << "Matrices are stored in a dynamic collection and can be added or removed.\n";
+	std::cout << "Advice! In the case when you need to perform the following actions ";
+	std::cout << "or exit, but the program does nothing, press enter.\n\n";
 	int key = _getch();
 }
 

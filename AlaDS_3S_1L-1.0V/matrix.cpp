@@ -73,7 +73,7 @@ void matrix::operator=(const matrix& rhs)
 matrix matrix::operator+(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices with different sizes cannot be added!");
 	matrix c;
 	c._N = _N;
 	c._M = _M;
@@ -91,7 +91,7 @@ matrix matrix::operator+(const matrix& rhs)
 matrix matrix::operator-(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes cannot be subtracted!");
 	matrix c;
 	c._N = _N;
 	c._M = _M;
@@ -108,7 +108,7 @@ matrix matrix::operator-(const matrix& rhs)
 matrix matrix::operator*(const matrix& rhs)
 {
 	if (_M != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes!");
 
 	matrix c;
 	c._N = _N;
@@ -170,7 +170,7 @@ bool matrix::operator!=(const matrix& rhs)
 bool matrix::operator>=(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes!");
 	for (int i = 0; i < _N; i++) {
 		for (int j = 0; j < _M; j++) {
 			if (_data[i][j] < rhs._data[i][j])
@@ -182,7 +182,7 @@ bool matrix::operator>=(const matrix& rhs)
 bool matrix::operator<=(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes!");
 	for (int i = 0; i < _N; i++) {
 		for (int j = 0; j < _M; j++) {
 			if (_data[i][j] > rhs._data[i][j])
@@ -194,7 +194,7 @@ bool matrix::operator<=(const matrix& rhs)
 bool matrix::operator>(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes!");
 	for (int i = 0; i < _N; i++) {
 		for (int j = 0; j < _M; j++) {
 			if (_data[i][j] <= rhs._data[i][j])
@@ -206,7 +206,7 @@ bool matrix::operator>(const matrix& rhs)
 bool matrix::operator<(const matrix& rhs)
 {
 	if (_M != rhs._M || _N != rhs._N)
-		throw std::logic_error("error");
+		throw std::logic_error("Matrices of different sizes!");
 	for (int i = 0; i < _N; i++) {
 		for (int j = 0; j < _M; j++) {
 			if (_data[i][j] >= rhs._data[i][j])
@@ -220,7 +220,7 @@ bool matrix::operator<(const matrix& rhs)
 double matrix::matrix_trace() const
 {
 	if (_N != _M)
-		throw std::logic_error("error");
+		throw std::logic_error("The matrix is not square!");
 	double res = 0;
 	for (int i = 0; i < _N; i++) {
 		res += _data[i][i];
