@@ -15,10 +15,6 @@ int main() {
 
 	edit_menu(cll);
 
-	for (int i = 0; i < cll._array_mtrx[i].get_M(); i++) {
-		delete[] cll._array_mtrx[i].get_data();
-	}
-	delete[] cll._array_mtrx;
 
 	return 0;
 }

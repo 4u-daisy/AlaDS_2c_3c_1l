@@ -10,6 +10,10 @@ int main_menu();
 int menu_working_with_matrix();
 int menu_mathematical_operations();
 
+int menu_bool_function();
+void bool_function(collection& cll);
+
+
 void print_current(collection& cll, unsigned int& ind, const int choose);
 
 template<typename T>

@@ -6,24 +6,26 @@ matrix::matrix() {
 	_M = 0;
 	_data = NULL;
 }
-matrix::matrix(const int N, const int M, double** data) {
+matrix::matrix(const int N, const int M) {
 	_N = N;
 	_M = M;
 	_data = new double* [_N];
 	for (int i = 0; i < _N; i++) {
-		_data[i] = new double[_M];
+		_data[i] = new double[_M]();
+	}
+}
+matrix::matrix(const matrix& rhs) : _N(rhs._N), _M(rhs._M) {
+	_data = new double* [_N];
+	for (int i = 0; i < _N; i++) {
+		_data[i] = new double[_M]();
+	}
+	for (int i = 0; i < _N; i++) {
 		for (int j = 0; j < _M; j++) {
-			_data[i][j] = data[i][j];
+			_data[i][j] = rhs._data[i][j];
 		}
 	}
 }
-matrix::matrix(const matrix& rhs) : _N(rhs._N), _M(rhs._M), _data(rhs._data) {}
 
-
-double** matrix::get_data() const
-{
-	return _data;
-}
 int matrix::get_N() const
 {
 	return _N;
@@ -64,9 +66,8 @@ bool matrix::operator==(const int i)
 }
 void matrix::operator=(const matrix& rhs) 
 {
-	_N = rhs._N;
-	_M = rhs._M;
-	_data = rhs._data;
+	matrix tmp(rhs);
+	swap(tmp);
 }
 
 
@@ -253,4 +254,3 @@ std::istream& operator>>(std::istream& in, matrix& lhs)
 	}
 	return in;
 }
-

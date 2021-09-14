@@ -36,11 +36,83 @@ int menu_mathematical_operations()
 	while (true)
 	{
 		std::cout << "1. Add up matrices\n2. Subtract matrices\n3. Matrix multiplication\n4. Multiply the current matrix by a number.\n";
-		std::cout << "5. Divide the current matrix by a number.\n6. Calculate the trace of the current matrix.\n\n7. Add matrix.\n";
+		std::cout << "5. Divide the current matrix by a number.\n6. Calculate the trace of the current matrix.\n7. Compare matrices.\n\n8. Add matrix.\n";
 		int key = get_key();
-		if (key == 27 || key >= 49 && key <= 55 || key == 75 || key == 77 || key == 13)
+		if (key == 27 || key >= 49 && key <= 56 || key == 75 || key == 77 || key == 13)
 			return key;
 	}
+}
+
+
+int menu_bool_function()
+{
+	while (true)
+	{
+		std::cout << "1. ==\n2. !=\n3. <=\n4. >=\n";
+		std::cout << "5. <\n6. >\nesc exit.\n";
+		int key = get_key();
+		if (key == 27 || key >= 49 && key <= 54 || key == 75 || key == 77 || key == 13)
+			return key;
+	}
+}
+void bool_function(collection& cll)
+{
+	while (true) {
+		try {
+			system("cls");
+			unsigned int a = 1, b = 1;
+			std::cout << "Select the matrices you want to work with.\n";
+			int _key = get_key();
+			choose_matrix(cll, a, b);
+			int choose = menu_bool_function();
+			if (choose == 49) {
+				if (cll._array_mtrx[a-1] == cll._array_mtrx[b-1])
+					std::cout << "matrix a = matrix b";
+				else
+					std::cout << "matrix a != matrix b";
+			}
+			if (choose == 50) {
+				if (cll._array_mtrx[a-1] != cll._array_mtrx[b-1])
+					std::cout << "matrix a != matrix b";
+				else
+					std::cout << "matrix a = matrix b";
+			}
+			if (choose == 51) {
+				if (cll._array_mtrx[a-1] <= cll._array_mtrx[b-1])
+					std::cout << "matrix a <= matrix b";
+				else
+					std::cout << "matrix a > matrix b";
+			}
+			if (choose == 52) {
+				if (cll._array_mtrx[a-1] >= cll._array_mtrx[b-1])
+					std::cout << "matrix a >= matrix b";
+				else
+					std::cout << "matrix a < matrix b";
+			}
+			if (choose == 53) {
+				if (cll._array_mtrx[a-1] < cll._array_mtrx[b-1])
+					std::cout << "matrix a < matrix b";
+				else
+					std::cout << "matrix a >= matrix b";
+			}
+			if (choose == 54) {
+				if (cll._array_mtrx[a-1] > cll._array_mtrx[b-1])
+					std::cout << "matrix a > matrix b";
+				else
+					std::cout << "matrix a <= matrix b";
+			}
+			if (choose == 27 || choose == 13) {
+				break;
+			}
+			int key = get_key();
+		}
+		catch (std::exception& e) {
+			std::cerr << "Caught: " << e.what() << std::endl;
+			std::cerr << "Type: " << typeid(e).name() << std::endl;
+			int key = get_key();
+		}
+	}
+
 }
 
 void print_current(collection& cll, unsigned int& ind, const int choose)
@@ -93,16 +165,9 @@ void add_matrix_with_input_values(collection& cll)
 		input_correctly_number(M);
 	} while (M < 0);
 	std::cout << "Input data in matrix:\n";
-	double** data;
-	data = new double* [N];
-	for (int i = 0; i < N; i++) {
-		data[i] = new double[M];
-		for (int j = 0; j < M; j++) {
-			std::cout << "Data[" << i << "][" << j << "] - ";
-			input_correctly_number(data[i][j]);
-		}
-	}
-	matrix v(N, M, data);
+	matrix v(N, M);
+	std::cin >> v;
+	
 	cll.push_back(v);
 }
 void add_random_matrix(collection& cll)
@@ -110,15 +175,14 @@ void add_random_matrix(collection& cll)
 	unsigned int N, M;
 	N = rand() % 4 + 1;
 	M = rand() % 4 + 1;
-	double** data;
-	data = new double* [N];
+	matrix v(N, M);
 	for (unsigned int i = 0; i < N; i++) {
-		data[i] = new double[M];
 		for (unsigned int j = 0; j < M; j++) {
-			data[i][j] = rand() % 20;
+			v(i, j) = rand() % 20;
 		}
 	}
-	matrix v(N, M, data);
+
+	
 	cll.push_back(v);
 	std::cout << v;
 }
@@ -141,6 +205,7 @@ void add_matrix(collection& cll)
 	}
 	int _key = _getch();
 }
+
 
 void change_data_current_matrix(collection& cll, const unsigned int ind)
 {
@@ -339,8 +404,11 @@ void mathematical_operations(collection& cll, unsigned int ind)
 			else if (choose >= 49 && choose <= 51) {
 				res_binary_matrix_opeartion(cll, choose);
 			}
-			else if (choose == 55) {
+			else if (choose == 56) {
 				add_matrix(cll);
+			}
+			else if (choose == 55) {
+				bool_function(cll);
 			}
 			else {
 				res_binary_numb_operation(cll, choose, ind);

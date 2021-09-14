@@ -1,4 +1,5 @@
 #pragma once
+#include <utility>
 #include <iostream>
 
 class matrix {
@@ -8,10 +9,23 @@ private:
 
 public:
 	matrix();
-	matrix(const int N, const int M, double** data);
+	matrix(const int N, const int M);
 	matrix(const matrix& rhs);
 
-	double** get_data() const;
+	void swap(matrix& rhs) {
+		std::swap(_N, rhs._N);
+		std::swap(_M, rhs._M);
+		std::swap(_data, rhs._data);
+
+	}
+
+	~matrix() {
+		for (int i = 0; i < _N; i++) {
+			delete[] _data[i];
+		}
+		delete[] _data;
+	}
+
 	int get_N() const;
 	int get_M() const;
 
