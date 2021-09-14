@@ -14,7 +14,6 @@ int main() {
 	cll.push_back(tmp);
 	cll.pop_back();
 
-
 	edit_menu(cll);
 
 	for (int i = 0; i < cll._array_mtrx[i].get_M(); i++) {

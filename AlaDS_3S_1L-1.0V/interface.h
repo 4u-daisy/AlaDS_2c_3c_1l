@@ -28,7 +28,7 @@ int menu_working_with_matrix() {
 		std::cout << "4. Remove the last matrix\n5. Edit all values of the current matrix\n6. Edit the value of the current matrix by index\nEsc exit\n";
 		std::cout << "Left arrow will show the previous matrix, right arrow will show the next matrix.\n";
 		int key = get_key();
-		if (key == 27 || key >= 49 && key <= 54 || key == 75 || key == 77)
+		if (key == 27 || key >= 49 && key <= 54 || key == 75 || key == 77 || key == 13)
 			return key;
 	}
 }
@@ -36,9 +36,9 @@ int menu_mathematical_operations() {
 	while (true)
 	{
 		std::cout << "1. Add up matrices\n2. Subtract matrices\n3. Matrix multiplication\n4. Multiply the current matrix by a number.\n";
-		std::cout << "5. Divide the current matrix by a number.\n6. Calculate the trace of the current matrix.\n";
+		std::cout << "5. Divide the current matrix by a number.\n6. Calculate the trace of the current matrix.\n\n7. Add matrix.\n";
 		int key = get_key();
-		if (key == 27 || key >= 49 && key <= 54 ||  key == 75 || key == 77)
+		if (key == 27 || key >= 49 && key <= 55 ||  key == 75 || key == 77 || key == 13)
 			return key;
 	}
 }
@@ -58,20 +58,38 @@ void print_current(collection& cll, unsigned int& ind, const int choose) {
 	}
 }
 
+
+template<typename T>
+void input_correctly_number(T& numb) {
+	do {
+		std::cout << "\nInput number: ";
+		std::cin.clear();
+		std::cin.ignore(std::cin.rdbuf()->in_avail());
+		std::cin >> numb;
+	} while (std::cin.fail());
+}
+
 void add_matrix(collection& cll) {
-	std::cout << "Input size matrix: N and M\nInput N: ";
-	unsigned int N, M;
-	std::cin >> N;
-	std::cout << "\nInput M: ";
-	std::cin >> M;
+	system("cls");
+	std::cout << "Please enter a number, not a string!\n";
+	std::cout << "Input size matrix: N and M\n";
+	int N = 0, M = 0;
+	do {
+		std::cout << "N >=0: ";
+		input_correctly_number(N);
+	} while (N < 0);
+	do {
+		std::cout << "M >=0: ";
+		input_correctly_number(M);
+	} while (M < 0);
 	std::cout << "Input data in matrix:\n";
 	double** data;
 	data = new double* [N];
-	for (unsigned int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) {
 		data[i] = new double[M];
-		for (unsigned int j = 0; j < M; j++) {
-			std::cout << "input data[" << i << "][" << j << "] - ";
-			std::cin >> data[i][j];
+		for (int j = 0; j < M; j++) {
+			std::cout << "Data[" << i << "][" << j << "] - ";
+			input_correctly_number(data[i][j]);
 		}
 	}
 	matrix v(N, M, data);
@@ -230,6 +248,16 @@ void res_binary_numb_operation(collection& cll, const int choose, const int ind)
 }
 
 
+void calculate_trace(collection& cll, const int ind) {
+	if (cll._size == 0) {
+		std::cout << "There are no matrices, let's add at least one!\n";
+		int _key = _getch();
+		add_need_matrix(cll);
+	}
+	std::cout << "Trace of the current matrix\nRESULT - ";
+	std::cout << cll._array_mtrx[ind].matrix_trace();
+	int key = _getch();
+}
 
 void working_with_matrix(collection& cll, unsigned int ind) {
 	while (true) {
@@ -244,7 +272,6 @@ void working_with_matrix(collection& cll, unsigned int ind) {
 			add_matrix(cll);
 			std::cout << "Success matrix added. Press any button to continue.\n";
 			int key = get_key();
-
 		}
 		if (choose == 51) {
 			add_random_matrix(cll);
@@ -270,7 +297,7 @@ void working_with_matrix(collection& cll, unsigned int ind) {
 			std::cout << "Success matrix changed. Press any button to continue.\n";
 			int key = get_key();
 		}
-		if (choose == 27) {
+		if (choose == 27 || choose == 13) {
 			break;
 		}
 		if (choose == 75 || choose == 77) {
@@ -285,16 +312,9 @@ void mathematical_operations(collection& cll, unsigned int ind) {
 			std::cout << "Current matrix is:\n" << cll._array_mtrx[ind] << "\n";
 			int choose = menu_mathematical_operations();
 			if (choose == 54) {
-				if (cll._size == 0) {
-					std::cout << "There are no matrices, let's add at least one!\n";
-					int _key = _getch();
-					add_need_matrix(cll);
-				}
-				std::cout << "Trace of the current matrix\nRESULT - ";
-				std::cout << cll._array_mtrx[ind].matrix_trace();
-				int key = _getch();
+				calculate_trace(cll, ind);
 			}
-			else if (choose == 27) {
+			else if (choose == 27 || choose == 13) {
 				break;
 			}
 			else if (choose == 75 || choose == 77) {
@@ -302,6 +322,9 @@ void mathematical_operations(collection& cll, unsigned int ind) {
 			}
 			else if (choose >= 49 && choose <= 51) {
 				res_binary_opeartion(cll, choose);
+			}
+			else if (choose == 55) {
+				add_need_matrix(cll);
 			}
 			else {
 				res_binary_numb_operation(cll, choose, ind);

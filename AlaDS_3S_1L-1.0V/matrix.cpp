@@ -24,12 +24,10 @@ double** matrix::get_data() const
 {
 	return _data;
 }
-
 int matrix::get_N() const
 {
 	return _N;
 }
-
 int matrix::get_M() const
 {
 	return _M;

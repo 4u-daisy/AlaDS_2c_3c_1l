@@ -1,2 +1,3 @@
-﻿  main.cpp
+﻿  matrix.cpp
+C:\Users\HOME\source\repos\AlaDS_3S_1L-1.0V\AlaDS_3S_1L-1.0V\matrix.cpp(245): warning C4715: operator<<: значение возвращается не при всех путях выполнения
   AlaDS_3S_1L-1.0V.vcxproj -> C:\Users\HOME\source\repos\AlaDS_3S_1L-1.0V\x64\Debug\AlaDS_3S_1L-1.0V.exe
