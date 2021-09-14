@@ -4,9 +4,6 @@
 //#include "collection.h"
 
 #include "interface.h"
-/*
-* for commit
-*/
 
 int main() {
 
